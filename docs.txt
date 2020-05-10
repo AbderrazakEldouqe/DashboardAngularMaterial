@@ -33,3 +33,53 @@ app-routing.module.ts
    
   }
 
+4) generate compoentns
+>ng generate component /modules/auth/components/login --module=auth
+>ng generate component /modules/auth/components/registerè --module=auth
+>ng generate component /modules/auth/components/landing --module=auth
+
+and go to auth-routing.module.ts
+add this>
+
+const routes: Routes = [
+  {path:'' ,component:LandingComponent},
+  {path:'login' ,component:LoginComponent},
+  {path:'register' ,component:RegisterComponent},
+  //{path:'**' ,component:PageNotFoundComponent}
+  {path:'**' ,redirectTo:'/login', pathMatch:'full'}
+];
+
+5)navigation with schematics
+https://material.angular.io/guide/schematics
+
+generate navigation from material
+> ng generate @angular/material:nav /modules/navigation/components/nav
+
+
+>ng generate @angular/material:dashboard /modules/navigation/components/dashboard
+>ng generate @angular/material:table /modules/navigation/components/table
+>ng generate @angular/cdk:drag-drop /modules/navigation/components/dragdrop
+>ng generate @angular/material:address-form /modules/navigation/components/address
+
+inn navigation-routing.module.ts add
+
+const routes: Routes = [
+  {
+    path:'' ,component:NavComponent,
+   children:[
+            {path:'dashboard',component: DashboardComponent},
+            {path:'table',component: TableComponent},
+            {path:'dragdrop',component: DragdropComponent},
+	    {path:'address',component: AddressComponent}
+            ]
+  }
+];
+ 
+6)  and go to nav.component.html 
+ <a mat-list-item routerLink="/home/dashboard">Dashboard</a>
+      <a mat-list-item routerLink="/home/table">Table</a>
+      <a mat-list-item routerLink="/home/dragdrop">DragDrop</a>
+      <a mat-list-item routerLink="/home/address">Address</a>
+and after content
+<!-- Add Content Here -->
+    <router-outlet></router-outlet>

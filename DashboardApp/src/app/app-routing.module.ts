@@ -12,6 +12,7 @@ const routes: Routes = [
     loadChildren:()=> import('./modules/navigation/navigation.module').then(m => m.NavigationModule)
    
   },
+  
   {
     path: '**',
     component: PageNotFoundComponent
