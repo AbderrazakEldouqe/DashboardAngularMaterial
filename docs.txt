@@ -1,0 +1,35 @@
+https://www.youtube.com/watch?v=1a6BpTFX5pE
+
+*******************************************
+1) add angular material
+>ng add @angular/material
+
+add in app.component.html 
+<router-outlet></router-outlet>
+
+2) generate module auth
+>ng generate module /modules/auth --routing
+
+go to app-routing.module.ts and add this module auth
+{
+    path: '',
+    loadChildren: './modules/auth/auth.module#AuthModule'
+  }
+
+
+3)generate component notfound 
+>ng generate component pageNotFound --module=app
+and add in route  app-routing.module.ts
+{
+    path: '**',
+    component: PageNotFoundComponent
+  }
+add other route :
+>ng generate module /modules/navigation --routing
+app-routing.module.ts
+{
+    path: 'home',
+    loadChildren:()=> import('./modules/navigation/navigation.module').then(m => m.NavigationModule)
+   
+  }
+
